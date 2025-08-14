@@ -84,6 +84,7 @@ def main(config: RunConfig):
     images = []
     for seed in config.seeds:
         print(f"Current seed is : {seed}")
+        # g：返回一个配置好的生成器，可用于 torch.randn, torch.randint 等随机操作。
         g = torch.Generator('cuda').manual_seed(seed)
         controller = AttentionStore()
         image = run_on_prompt(prompt=config.prompt,

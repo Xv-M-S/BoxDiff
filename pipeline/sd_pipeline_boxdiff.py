@@ -495,6 +495,7 @@ class BoxDiffPipeline(StableDiffusionPipeline):
             :type attention_store: object
         """
         # 0. Default height and width to unet
+        # (height, width) = (512, 512) if height and width are None
         height = height or self.unet.config.sample_size * self.vae_scale_factor
         width = width or self.unet.config.sample_size * self.vae_scale_factor
 
@@ -535,6 +536,7 @@ class BoxDiffPipeline(StableDiffusionPipeline):
 
         # 5. Prepare latent variables
         num_channels_latents = self.unet.in_channels
+        # latents(1,4,64,64)
         latents = self.prepare_latents(
             batch_size * num_images_per_prompt,
             num_channels_latents,
